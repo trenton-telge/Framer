@@ -25,8 +25,10 @@ public class RemoteImage
         title= name;
     }
 
-    RemoteImage(String json)    // Split Json string
+    public RemoteImage(String json)    // Split Json string
     {
+        json=json.substring(json.indexOf(":")+2);
+        System.out.println(json); // just to test not necessary
 
     }
 }
