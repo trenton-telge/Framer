@@ -40,7 +40,8 @@ public class FramerDaydreamService extends DreamService {
     @Override
     public void onDreamingStarted() {
         super.onDreamingStarted();
-
+        displayNewImage();
+        //TODO set timer on next displayNewImage call
         /*
         TODO set the following:
             image source
