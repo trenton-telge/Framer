@@ -19,13 +19,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Vector;
+
+import edu.lonestar.framer.util.ArtistSwitch;
+import edu.lonestar.framer.*;
+import edu.lonestar.framer.util.RemoteImage;
+
 /**
  * Created by husse on 1/27/2018.
  */
 
-public class Custom_adapter extends ArrayAdapter<String> {
+public class Custom_adapter extends ArrayAdapter<ArtistSwitch> {
     // creating the string vector to populate it
-    Vector<String> names = new Vector<String>();
+    Vector<ArtistSwitch> names = new Vector<ArtistSwitch>();
     // just a vector for testing making an object later
     static Vector<String> holder = new Vector<String>();
 
@@ -68,6 +73,16 @@ public class Custom_adapter extends ArrayAdapter<String> {
             }
         }
     };
+
+    private Vector<String> artistNames(){
+        Vector<String> finalResults = new Vector<String>();
+        for (RemoteImage i: DownloadDamon.unfiltered){
+            if (!finalResults.contains(i.artist)){
+                finalResults.add(i.artist)
+            }
+        }
+        return finalResults;
+    }
 
 }
 
