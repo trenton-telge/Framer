@@ -15,6 +15,7 @@ import edu.lonestar.framer.util.RemoteImage;
 
 public class DownloadDaemon
 {
+    static Vector<RemoteImage> obunfiltered;
     Vector<RemoteImage> parseString()
     {
         // Get http response, include try catch for handle exception
@@ -30,7 +31,7 @@ public class DownloadDaemon
             // Remove the one which is just copied
 
             //  for loop to store in unfiltered vector
-            Vector<RemoteImage> obunfiltered= new Vector<>();
+            obunfiltered= new Vector<>();
             for (String s: strings)
             {
                 obunfiltered.addElement(new RemoteImage(s));
