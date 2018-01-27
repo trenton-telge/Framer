@@ -16,6 +16,9 @@ package edu.lonestar.framer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ListView;
+
+import java.util.Vector;
 
 public class SettingsActivity extends Activity {
 
@@ -23,5 +26,27 @@ public class SettingsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        // setting the id to the list view
+        final ListView list_view_authors = (ListView) findViewById(R.id.list);
+        // creating test string vector
+        Vector<String> testing = new Vector<String>();
+        testing.add("Hussein Syed");
+        testing.add("Trenton Telge");
+        testing.add("Allison Wykle");
+        testing.add("Luong Luong");
+        testing.add("1");
+        testing.add("1");
+        testing.add("1");
+        testing.add("1");
+        testing.add("1");
+        testing.add("1");
+        for (int x = 10; x<100;x++)
+        {
+            testing.add("1");
+        }
+        // creating the adapter object
+        final Custom_adapter dataadapter = new Custom_adapter(this,testing);
+                // setting the adapter
+        list_view_authors.setAdapter(dataadapter);
     }
 }
