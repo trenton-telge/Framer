@@ -35,7 +35,7 @@ public class DownloadDaemon
     // Vector String to store json lists and for loop to store in unfiltered vector
         Vector<RemoteImage> obunfiltered= new Vector<>();
         Vector<String> strings= new Vector<>();// Store the Json Lists
-            strings
+
 
 
     // Vector object Filtered
