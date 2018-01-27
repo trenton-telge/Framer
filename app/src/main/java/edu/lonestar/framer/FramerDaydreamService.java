@@ -1,9 +1,17 @@
 package edu.lonestar.framer;
 
 import android.annotation.TargetApi;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.service.dreams.DreamService;
+import android.widget.ImageView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.concurrent.ThreadLocalRandom;
 
 import edu.lonestar.framer.util.RemoteImage;
@@ -17,7 +25,7 @@ import edu.lonestar.framer.util.RemoteImage;
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerDaydreamService extends DreamService {
-
+    static ImageView myImageView;
 
     @Override
     public void onAttachedToWindow() {
@@ -34,7 +42,7 @@ public class FramerDaydreamService extends DreamService {
 
         // Set the content view, just like you would with an Activity.
         setContentView(R.layout.framer_daydream);
-
+        myImageView = findViewById(R.id.imageView);
     }
 
     @Override
@@ -68,6 +76,28 @@ public class FramerDaydreamService extends DreamService {
     private void displayNewImage(){
         RemoteImage imageToDisplay = DownloadDaemon.obfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obfiltered.size()+ 1));
 
+    }
+    static class DownloadTask extends AsyncTask<String,Object,Bitmap>{
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            try {
+                URL url = new URL(strings[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                return myBitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            myImageView.setImageBitmap(result);
+        }
     }
 
 }
