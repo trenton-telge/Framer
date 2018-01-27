@@ -4,6 +4,10 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.service.dreams.DreamService;
 
+import java.util.concurrent.ThreadLocalRandom;
+
+import edu.lonestar.framer.util.RemoteImage;
+
 /**
  * This class is a sample implementation of a DreamService. When activated, a
  * TextView will repeatedly, move from the left to the right of screen, at a
@@ -44,6 +48,7 @@ public class FramerDaydreamService extends DreamService {
             text
         */
 
+
     }
 
     @Override
@@ -57,6 +62,11 @@ public class FramerDaydreamService extends DreamService {
         super.onDetachedFromWindow();
 
         // TODO: Dismantle resources
+    }
+
+    private void displayNewImage(){
+        RemoteImage imageToDisplay = DownloadDaemon.obfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obfiltered.size()+ 1));
+
     }
 
 }
