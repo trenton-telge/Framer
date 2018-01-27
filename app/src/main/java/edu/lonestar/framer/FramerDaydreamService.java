@@ -26,20 +26,6 @@ import android.widget.TextView;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerDaydreamService extends DreamService {
 
-    private static final TimeInterpolator sInterpolator = new LinearInterpolator();
-    private final Random mRandom = new Random();
-    private final Point mPointSize = new Point();
-    private TextView mDreamTextView;
-    private ViewPropertyAnimator mAnimator;
-    private final AnimatorListener mAnimListener = new AnimatorListenerAdapter() {
-
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            // Start animation again
-            startTextViewScrollAnimation();
-        }
-
-    };
 
     @Override
     public void onAttachedToWindow() {
@@ -57,26 +43,25 @@ public class FramerDaydreamService extends DreamService {
         // Set the content view, just like you would with an Activity.
         setContentView(R.layout.framer_daydream);
 
-        mDreamTextView = (TextView) findViewById(R.id.dream_text);
-        mDreamTextView.setText(getTextFromPreferences());
     }
 
     @Override
     public void onDreamingStarted() {
         super.onDreamingStarted();
 
-        // TODO: Begin animations or other behaviors here.
+        /*
+        TODO set the following:
+            image source
+            buffer (overscan + 3 in)
+            text
+        */
 
-        startTextViewScrollAnimation();
     }
 
     @Override
     public void onDreamingStopped() {
         super.onDreamingStopped();
 
-        // TODO: Stop anything that was started in onDreamingStarted()
-
-        mAnimator.cancel();
     }
 
     @Override
@@ -84,38 +69,6 @@ public class FramerDaydreamService extends DreamService {
         super.onDetachedFromWindow();
 
         // TODO: Dismantle resources
-        // (for example, detach from handlers and listeners).
-    }
-
-    private String getTextFromPreferences() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        return prefs.getString(getString(R.string.pref_dream_text_key),
-                getString(R.string.pref_dream_text_default));
-    }
-
-    private void startTextViewScrollAnimation() {
-        // Refresh Size of Window
-        getWindowManager().getDefaultDisplay().getSize(mPointSize);
-
-        final int windowWidth = mPointSize.x;
-        final int windowHeight = mPointSize.y;
-
-        // Move TextView so it's moved all the way to the left
-        mDreamTextView.setTranslationX(-mDreamTextView.getWidth());
-
-        // Move TextView to random y value
-        final int yRange = windowHeight - mDreamTextView.getHeight();
-        mDreamTextView.setTranslationY(mRandom.nextInt(yRange));
-
-        // Create an Animator and keep a reference to it
-        mAnimator = mDreamTextView.animate().translationX(windowWidth)
-                .setDuration(3000)
-                .setStartDelay(500)
-                .setListener(mAnimListener)
-                .setInterpolator(sInterpolator);
-
-        // Start the animation
-        mAnimator.start();
     }
 
 }
