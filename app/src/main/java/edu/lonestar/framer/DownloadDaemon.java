@@ -22,6 +22,21 @@ public class DownloadDaemon
         try
         {
             String initialData =  IOUtils.toString(URI.create("http://eventhorizonwebdesign.com/framed/api/index.php/images"));
+            new RemoteImage(initialData);
+            //ector String to store json lists and
+            Vector<String> strings= new Vector<>();// Store the Json Lists
+            strings.add(initialData.substring(0, initialData.indexOf("},{") + 1)); // copy to vector
+            initialData = initialData.substring(initialData.indexOf("},{") + 1, initialData.length());
+            // Remove the one which is just copied
+
+            //  for loop to store in unfiltered vector
+            Vector<RemoteImage> obunfiltered= new Vector<>();
+            for (String s: strings)
+            {
+                obunfiltered.addElement(new RemoteImage(s));
+            }
+
+
 
         }
         catch(Exception e)
@@ -32,14 +47,13 @@ public class DownloadDaemon
         return new Vector(); // double check what to return
     }
 
-    // Vector String to store json lists and for loop to store in unfiltered vector
-        Vector<RemoteImage> obunfiltered= new Vector<>();
-        Vector<String> strings= new Vector<>();// Store the Json Lists
+
+
 
 
 
     // Vector object Filtered
-        Vector<RemoteImage> obfiltered= new Vector<>();
+        static Vector<RemoteImage> obfiltered= new Vector<>();
 
 
 }
