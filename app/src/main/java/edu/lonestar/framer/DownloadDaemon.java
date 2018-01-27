@@ -1,12 +1,8 @@
 package edu.lonestar.framer;
 
-import org.apache.commons.io.IOUtils;
 
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-import java.lang.String;
 import java.util.Vector;
+
 import edu.lonestar.framer.util.RemoteImage;
 /**
  * Created by LUONG LUONG on 1/27/2018.
@@ -22,7 +18,7 @@ public class DownloadDaemon
         Vector<RemoteImage> ob= new Vector<>(); // Work on this one later
         try
         {
-            String initialData =  IOUtils.toString(URI.create("http://eventhorizonwebdesign.com/framed/api/index.php/images"));
+            String initialData =  ""; //TODO
             new RemoteImage(initialData);
             //ector String to store json lists and
             Vector<String> strings= new Vector<>();// Store the Json Lists

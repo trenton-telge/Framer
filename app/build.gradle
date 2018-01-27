@@ -1,11 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a'
+            universalApk true
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "edu.lonestar.framer"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -24,6 +32,5 @@ dependencies {
     implementation 'com.android.support:leanback-v17:27.0.2'
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
-    implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
