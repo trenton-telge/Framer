@@ -28,7 +28,7 @@ public class RemoteImage
     public RemoteImage(String json)    // Split Json string
     {
         json=json.substring(json.indexOf(":")+2);
-        System.out.println(json); // just to test not necessary
+       // System.out.println(json); // just to test not necessary
 
     }
 

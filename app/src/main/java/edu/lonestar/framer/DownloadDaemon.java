@@ -1,8 +1,11 @@
 package edu.lonestar.framer;
 
 
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.lang.String;
 import java.util.Vector;
-
 import edu.lonestar.framer.util.RemoteImage;
 /**
  * Created by LUONG LUONG on 1/27/2018.
@@ -18,7 +21,7 @@ public class DownloadDaemon
         Vector<RemoteImage> ob= new Vector<>(); // Work on this one later
         try
         {
-            String initialData =  ""; //TODO
+            String initialData = ""; //TODO
             new RemoteImage(initialData);
             //ector String to store json lists and
             Vector<String> strings= new Vector<>();// Store the Json Lists
