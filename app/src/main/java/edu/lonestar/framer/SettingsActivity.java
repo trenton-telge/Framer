@@ -21,6 +21,7 @@ import android.widget.ListView;
 import java.util.Vector;
 
 public class SettingsActivity extends Activity {
+    Custom_adapter dataadapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class SettingsActivity extends Activity {
             testing.add("1");
         }
         // creating the adapter object
-        final Custom_adapter dataadapter = new Custom_adapter(this,testing);
+        dataadapter = new Custom_adapter(this,testing);
                 // setting the adapter
         list_view_authors.setAdapter(dataadapter);
     }
