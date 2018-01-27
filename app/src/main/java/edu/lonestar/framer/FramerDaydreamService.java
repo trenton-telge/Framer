@@ -1,20 +1,8 @@
 package edu.lonestar.framer;
 
-import java.util.Random;
-
-import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.TimeInterpolator;
 import android.annotation.TargetApi;
-import android.content.SharedPreferences;
-import android.graphics.Point;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.service.dreams.DreamService;
-import android.view.ViewPropertyAnimator;
-import android.view.animation.LinearInterpolator;
-import android.widget.TextView;
 
 /**
  * This class is a sample implementation of a DreamService. When activated, a
