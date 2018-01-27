@@ -4,47 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/lb_background" />
+            app:srcCompat="@drawable/lb_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Space
             android:id="@+id/bufferLeft"
             android:layout_width="3in"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imageView"
             android:background="@android:color/white"
-            android:backgroundTint="@android:color/white" />
+            android:backgroundTint="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <Space
             android:layout_width="3in"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/bufferLeft"
             android:background="@android:color/white"
             android:backgroundTint="@android:color/white"
-            android:id="@+id/bufferRight" />
+            android:id="@+id/bufferRight"
+            app:layout_constraintTop_toTopOf="@+id/bufferLeft"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Space
             android:id="@+id/bufferTop"
-            android:layout_width="wrap_content"
             android:layout_height="3in"
-            android:layout_alignTop="@+id/bufferLeft"
-            android:layout_toEndOf="@+id/bufferLeft"
-            android:layout_toStartOf="@+id/bufferRight" />
+            app:layout_constraintEnd_toStartOf="@+id/bufferRight"
+            app:layout_constraintStart_toEndOf="@+id/bufferLeft"
+            app:layout_constraintTop_toTopOf="@+id/bufferLeft"
+            android:layout_width="match_parent" />
 
         <Space
             android:id="@+id/bufferBottom"
             android:layout_height="3in"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/bufferLeft"
-            android:layout_toStartOf="@+id/bufferRight" />
-    </RelativeLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bufferLeft"
+            app:layout_constraintEnd_toStartOf="@+id/bufferRight"
+            android:layout_width="match_parent" />
+    </android.support.constraint.ConstraintLayout>
 </FrameLayout>
