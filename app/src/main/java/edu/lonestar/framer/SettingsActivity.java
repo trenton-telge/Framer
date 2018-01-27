@@ -17,9 +17,6 @@ package edu.lonestar.framer;
 import android.app.Activity;
 import android.os.Bundle;
 
-/*
- * MainActivity class that loads {@link MainFragment}.
- */
 public class SettingsActivity extends Activity {
 
     @Override
