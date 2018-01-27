@@ -7,15 +7,22 @@ import android.app.Activity;
  */
 
 public class ArtistSwitch  extends Activity{
-    boolean selected;
-    String name;
-    ArtistSwitch(String artist, boolean select)
+   public  boolean selected;
+    public String name;
+   public  ArtistSwitch(String artist, boolean select)
 {
     // assigning them
     this.selected = select;
     this.name = artist;
 
 }
+    public String getName(){
+        return this.name;
+    }
+    public boolean getValue(){
+        return this.selected;
+    }
+
 
 
 }

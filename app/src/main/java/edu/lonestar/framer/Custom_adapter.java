@@ -34,12 +34,12 @@ public class Custom_adapter extends ArrayAdapter<ArtistSwitch> {
     // just a vector for testing making an object later
     static Vector<String> holder = new Vector<String>();
 
-    Custom_adapter(Context context, Vector<String> collector) {
+    Custom_adapter(Context context, Vector<ArtistSwitch> collector) {
         // resource the array itself
         // context is the background information
         // stuff your custom layout in here to be sent to each layout
+         //connecting it after it gets passed
         super(context, R.layout.row, collector);
-        // connecting it after it gets passed
         this.names = collector;
     }
 
@@ -50,7 +50,7 @@ public class Custom_adapter extends ArrayAdapter<ArtistSwitch> {
         convertView = inflater.inflate(R.layout.row, parent, false);
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
         // just trying to set the text of the checkbox
-        cb.setText(names.get(position));
+        cb.setText(names.get(position).getName());
         // since only one instance of the custom adaptor just save the position
         cb.setOnCheckedChangeListener(mListener);
         return convertView;
@@ -76,9 +76,9 @@ public class Custom_adapter extends ArrayAdapter<ArtistSwitch> {
 
     private Vector<String> artistNames(){
         Vector<String> finalResults = new Vector<String>();
-        for (RemoteImage i: DownloadDamon.unfiltered){
-            if (!finalResults.contains(i.artist)){
-                finalResults.add(i.artist)
+        for (RemoteImage i: DownloadDaemon.obunfiltered){
+            if (!finalResults.contains(i.getArtist())){
+                finalResults.add(i.getArtist());
             }
         }
         return finalResults;

@@ -20,6 +20,8 @@ import android.widget.ListView;
 
 import java.util.Vector;
 
+import edu.lonestar.framer.util.ArtistSwitch;
+
 public class SettingsActivity extends Activity {
     Custom_adapter dataadapter;
 
@@ -30,20 +32,12 @@ public class SettingsActivity extends Activity {
         // setting the id to the list view
         final ListView list_view_authors = (ListView) findViewById(R.id.list);
         // creating test string vector
-        Vector<String> testing = new Vector<String>();
-        testing.add("Hussein Syed");
-        testing.add("Trenton Telge");
-        testing.add("Allison Wykle");
-        testing.add("Luong Luong");
-        testing.add("1");
-        testing.add("1");
-        testing.add("1");
-        testing.add("1");
-        testing.add("1");
-        testing.add("1");
+        Vector<ArtistSwitch> testing = new Vector<ArtistSwitch>();
+
         for (int x = 10; x<100;x++)
         {
-            testing.add("1");
+            ArtistSwitch tester = new ArtistSwitch("Hussein",true);
+            testing.add(tester);
         }
         // creating the adapter object
         dataadapter = new Custom_adapter(this,testing);
