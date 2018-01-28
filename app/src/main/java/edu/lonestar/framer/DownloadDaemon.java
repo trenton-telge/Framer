@@ -1,5 +1,7 @@
 package edu.lonestar.framer;
-
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -49,6 +51,12 @@ public class DownloadDaemon
                 obunfiltered.addElement(new RemoteImage(s));
             }
 
+            Collection<RemoteImage> collection = new ArrayList<RemoteImage>();
+            // for loop
+            for (Iterator<RemoteImage> iterator = collection.iterator();;)
+            {
+
+            }
 
 
         }

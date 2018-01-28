@@ -28,8 +28,25 @@ public class RemoteImage
     public RemoteImage(String json)    // Split Json string
     {
         json=json.substring(json.indexOf(":")+2);
-       // System.out.println(json); // just to test not necessary
-
+        this.id = Integer.parseInt(json.substring(0, json.indexOf(",")));
+        //artist
+        json=json.substring(json.indexOf(":")+3);
+        this.artist = (json.substring(0, json.indexOf("\"")));
+        //height
+        json=json.substring(json.indexOf(":")+2);
+        this.year = Integer.parseInt(json.substring(0, json.indexOf(",")));
+        //Width
+        json=json.substring(json.indexOf(":")+2); // start to count after the colon
+        this.height = Integer.parseInt(json.substring(0, json.indexOf(",")));
+        //artist
+        json=json.substring(json.indexOf(":")+2);
+        this.width = Integer.parseInt(json.substring(0, json.indexOf(",")));
+        //URL
+        json=json.substring(json.indexOf(":")+3);
+        this.url = (json.substring(0, json.indexOf("\"")));
+        //title
+        json=json.substring(json.indexOf(":")+3);
+        this.title = (json.substring(0, json.indexOf("\"")));
     }
 
     public int getId() {
