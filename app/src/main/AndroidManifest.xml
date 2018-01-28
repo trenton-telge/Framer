@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Leanback">
         <activity
             android:name=".SettingsActivity"
-            android:banner="@drawable/app_icon_your_company"
+            android:banner="@drawable/framer_banner"
             android:icon="@drawable/app_icon_your_company"
             android:label="@string/app_name"
             android:logo="@drawable/app_icon_your_company"
