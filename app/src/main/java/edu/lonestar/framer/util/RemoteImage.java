@@ -52,35 +52,43 @@ public class RemoteImage
         this.title = (json.substring(0, json.indexOf("\"")));
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 
-    public int getYear() {
+    public int getYear()
+    {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(int year)
+    {
         this.year = year;
     }
 
-    public int getHeight() {
+    public int getHeight()
+    {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(int height)
+    {
         this.height = height;
     }
 
-    public int getWidth() {
+    public int getWidth()
+    {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(int width)
+    {
         this.width = width;
     }
 
@@ -88,7 +96,8 @@ public class RemoteImage
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(String artist)
+    {
         this.artist = artist;
     }
 
@@ -96,15 +105,18 @@ public class RemoteImage
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(String url)
+    {
         this.url = url;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 }
