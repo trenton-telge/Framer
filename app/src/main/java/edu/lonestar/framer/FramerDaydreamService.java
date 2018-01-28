@@ -70,7 +70,7 @@ public class FramerDaydreamService extends DreamService {
 
     private void displayNewImage(){
         if (DownloadDaemon.obunfiltered.size() > 0) {
-            RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obunfiltered.size() + 1));
+            RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obunfiltered.size()));
             new DownloadTask().execute(imageToDisplay.getUrl());
             ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
             ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
