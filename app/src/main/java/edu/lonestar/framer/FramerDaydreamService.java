@@ -32,6 +32,8 @@ public class FramerDaydreamService extends DreamService {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
 
+        new DownloadDaemon().parseString();
+
         // Exit dream upon user touch?
         setInteractive(false);
 
