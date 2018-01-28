@@ -19,9 +19,9 @@ public class DownloadDaemon
 
     static Vector<RemoteImage> obfiltered = new Vector<>();
     static Vector<RemoteImage> obunfiltered = new Vector<>();
-    public void parseString()
+    public void refresh()
     {
-
+        new RefreshDataTask().execute(new Object());
     }
     static class RefreshDataTask extends AsyncTask<Object, Object, Void> {
 
@@ -69,6 +69,7 @@ public class DownloadDaemon
             return null;
         }
 // finding average number of pixels in each color
+        //TODO
         public void adt(Bitmap b)
         {
 

@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.service.dreams.DreamService;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,7 +30,7 @@ public class FramerDaydreamService extends DreamService {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        new DownloadDaemon().parseString();
+        new DownloadDaemon().refresh();
 
         // Exit dream upon user touch?
         setInteractive(false);
@@ -52,15 +53,14 @@ public class FramerDaydreamService extends DreamService {
         displayNewImage();
         //TODO set matting size due to overscan
 
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        displayNewImage();
-                    }
-                },
-                sharedPref.getInt("length_of_time", 30)*1000
-        );
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                displayNewImage();
+            }
+        }, sharedPref.getInt("length_of_time", 30)*1000);
     }
 
     @Override
@@ -82,7 +82,13 @@ public class FramerDaydreamService extends DreamService {
         } else {
             myImageView.setImageResource(R.drawable.framer_banner);
             //TODO make image resize to fill bounds
-            //TODO wait 500 milli and recursively call
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    displayNewImage();
+                }
+            }, 500);
         }
         if (sharedPref.getBoolean("display_nameplate", false)) {
             findViewById(R.id.nameplateLayout).setVisibility(View.VISIBLE);

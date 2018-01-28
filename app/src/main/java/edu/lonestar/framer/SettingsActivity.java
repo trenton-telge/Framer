@@ -17,7 +17,6 @@ package edu.lonestar.framer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -28,14 +27,10 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.Vector;
 
 import edu.lonestar.framer.util.ArtistSwitchModel;
 import edu.lonestar.framer.util.RemoteImage;
-
-import static java.lang.reflect.Array.getInt;
 
 public class SettingsActivity extends Activity {
 
@@ -53,7 +48,7 @@ public class SettingsActivity extends Activity {
         // creating the adapter object
         dataadapter = new ArtistListAdapter(this, refreshArtistSwitchVector());
                 // setting the adapter
-        new DownloadDaemon().parseString();
+        new DownloadDaemon().refresh();
 
         list_view_artists.setAdapter(dataadapter);
         // settings id's
