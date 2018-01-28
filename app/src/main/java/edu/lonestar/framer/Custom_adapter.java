@@ -46,6 +46,7 @@ public class Custom_adapter extends ArrayAdapter<ArtistSwitch> {
         // stuff your custom layout in here to be sent to each layout
          //connecting it after it gets passed
         super(context, R.layout.row, collector);
+        new DownloadDaemon().parseString();
         this.names = collector;
     }
 
