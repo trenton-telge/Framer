@@ -33,10 +33,11 @@
         <!-- This service is only used on devices with API v17+ -->
         <service
             android:name=".FramerDaydreamService"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
             <intent-filter>
                 <action android:name="android.service.dreams.DreamService" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
