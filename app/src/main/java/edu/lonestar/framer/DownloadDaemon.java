@@ -7,6 +7,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Vector;
 import android.graphics.Bitmap;
+import android.util.Log;
+
 import edu.lonestar.framer.util.RemoteImage;
 
 /**
@@ -42,23 +44,15 @@ public class DownloadDaemon
                 }
                 String result = sb.toString();  //set the result string to fully build appendix
                 //Vector String to store json lists and
-                Vector<String> strings = new Vector<>();// Store the Json Lists
-                strings.add(result.substring(0, result.indexOf("},{") + 1)); // copy to vector
-                while (result.contains("},{")) {
-                    result = result.substring(result.indexOf("},{") + 1, result.length());
-                    strings.add(result.substring(0, result.indexOf("},{") + 1));
-                }
+                String f = "\"\n {4}";
+                String[] strings = result.split(f);
 
                 //  for loop to store in unfiltered vector
                 obunfiltered = new Vector<>();
-                for (String s : strings) {
-                    obunfiltered.addElement(new RemoteImage(s));
-                }
-                obfiltered = new Vector<>();
-                for (RemoteImage ob : obunfiltered) {
-                    //TODO if ob.artist is a checked artist, add to opfiltered
-
-                }
+                    for (String s : strings) {
+                        s = s+ "\"";
+                        obunfiltered.addElement(new RemoteImage(s));
+                    }
             }
 
 
@@ -68,37 +62,36 @@ public class DownloadDaemon
             }
             return null;
         }
-// finding average number of pixels in each color
-        //TODO
-        public void adt(Bitmap b)
-        {
-
-            ; //assign your bitmap here
-            int redColors = 0;
-            int greenColors = 0;
-            int blueColors = 0;
-            int pixelCount = 0;
-
-            for (int y = 0; y < b.getHeight(); y++)
-            {
-                for (int x = 0; x < b.getWidth(); x++)
-                {
-                    int c = b.getPixel(x, y);
-                    pixelCount++;
-                    redColors += Color.red(c);
-                    greenColors += Color.green(c);
-                    blueColors += Color.blue(c);
-                }
-            }
-            // calculate average of bitmap r,g,b values
-            int red = (redColors/pixelCount);
-            int green = (greenColors/pixelCount);
-            int blue = (blueColors/pixelCount);
-        }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             SettingsActivity.refreshArtistSwitchVector();
         }
+    }
+
+    public void adt(Bitmap b)
+    {
+
+        ; //assign your bitmap here
+        int redColors = 0;
+        int greenColors = 0;
+        int blueColors = 0;
+        int pixelCount = 0;
+
+        for (int y = 0; y < b.getHeight(); y++)
+        {
+            for (int x = 0; x < b.getWidth(); x++)
+            {
+                int c = b.getPixel(x, y);
+                pixelCount++;
+                redColors += Color.red(c);
+                greenColors += Color.green(c);
+                blueColors += Color.blue(c);
+            }
+        }
+        // calculate average of bitmap r,g,b values
+        int red = (redColors/pixelCount);
+        int green = (greenColors/pixelCount);
+        int blue = (blueColors/pixelCount);
     }
 }
