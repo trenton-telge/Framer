@@ -28,14 +28,14 @@ import edu.lonestar.framer.util.ArtistSwitchModel;
 import edu.lonestar.framer.util.RemoteImage;
 
 public class SettingsActivity extends Activity {
-    SharedPreferences sharedPref = getApplication().getSharedPreferences("framer", Context.MODE_PRIVATE);
+    SharedPreferences sharedPref;
     ArtistListAdapter dataadapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        sharedPref = this.getSharedPreferences("framer", Context.MODE_PRIVATE);
         // setting the id to the list view
         final ListView list_view_artists = (ListView) findViewById(R.id.list);
 

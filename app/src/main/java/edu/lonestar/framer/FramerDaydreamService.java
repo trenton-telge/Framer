@@ -16,13 +16,16 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 import edu.lonestar.framer.util.RemoteImage;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerDaydreamService extends DreamService {
-    SharedPreferences sharedPref = getApplication().getSharedPreferences("framer", Context.MODE_PRIVATE);
+    SharedPreferences sharedPref;
     static ImageView myImageView;
     @Override
     public void onAttachedToWindow() {
@@ -42,6 +45,7 @@ public class FramerDaydreamService extends DreamService {
         // Set the content view, just like you would with an Activity.
         setContentView(R.layout.framer_daydream);
         myImageView = findViewById(R.id.imageView);
+        sharedPref = getApplication().getSharedPreferences("framer", Context.MODE_PRIVATE);
     }
 
     @Override
@@ -68,10 +72,23 @@ public class FramerDaydreamService extends DreamService {
     }
 
     private void displayNewImage(){
-        RemoteImage imageToDisplay = DownloadDaemon.obfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obfiltered.size()+ 1));
-        new DownloadTask().execute(imageToDisplay.getUrl());
-        ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
-        ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"),"%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
+        if (DownloadDaemon.obfiltered.size() > 0) {
+            RemoteImage imageToDisplay = DownloadDaemon.obfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obfiltered.size() + 1));
+            new DownloadTask().execute(imageToDisplay.getUrl());
+            ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
+            ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
+        } else {
+            myImageView.setImageResource(R.drawable.framer_banner);
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            displayNewImage();
+                        }
+                    },
+                    500
+            );
+        }
     }
     static class DownloadTask extends AsyncTask<String,Object,Bitmap>{
 
