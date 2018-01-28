@@ -28,6 +28,7 @@ import edu.lonestar.framer.util.ArtistSwitchModel;
 import edu.lonestar.framer.util.RemoteImage;
 
 public class SettingsActivity extends Activity {
+
     SharedPreferences sharedPref;
     ArtistListAdapter dataadapter;
     @Override
@@ -43,24 +44,39 @@ public class SettingsActivity extends Activity {
         dataadapter = new ArtistListAdapter(this, refreshArtistSwitchVector());
                 // setting the adapter
         new DownloadDaemon().parseString();
+
         list_view_artists.setAdapter(dataadapter);
-
-
-        //
-        //
+        // settings id's
+        final Switch Adaptive_matting = findViewById(R.id.switch2);
         final Switch displayNameplateSwitch = findViewById(R.id.displayNameplateSwitch);
+
+        Adaptive_matting.setChecked(sharedPref.getBoolean("display_nameplate", false));
+        Adaptive_matting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor a = sharedPref.edit();
+                // just saving whether the adaptive matting is on or not
+                a.putBoolean("adaptive_matting", Adaptive_matting.isChecked());
+                a.apply();
+
+            }
+        });
+
         displayNameplateSwitch.setChecked(sharedPref.getBoolean("display_nameplate", false));
         displayNameplateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor e = sharedPref.edit();
+                // just saving the name plate and whether it was checked
                 e.putBoolean("display_nameplate", displayNameplateSwitch.isChecked());
                 e.apply();
+
             }
         });
         //
         //
     }
+// returning the actual vector
 
     public static Vector<ArtistSwitchModel> refreshArtistSwitchVector(){
         Vector<ArtistSwitchModel> finalArtists = new Vector<>();
