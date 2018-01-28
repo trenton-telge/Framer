@@ -9,7 +9,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.service.dreams.DreamService;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,8 +54,12 @@ public class FramerDaydreamService extends DreamService {
         super.onDreamingStarted();
         displayNewImage();
         //TODO set matting size due to overscan
-
-
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        findViewById(R.id.bufferLeft).setMinimumWidth(findViewById(R.id.bufferLeft).getWidth()+(display.getWidth()*sharedPref.getInt("overscan", 0)/200));
+        findViewById(R.id.bufferRight).setMinimumWidth(findViewById(R.id.bufferRight).getWidth()+(display.getWidth()*sharedPref.getInt("overscan", 0)/200));
+        findViewById(R.id.bufferTop).setMinimumHeight(findViewById(R.id.bufferTop).getHeight()+(display.getHeight()*sharedPref.getInt("overscan", 0)/200));
+        findViewById(R.id.bufferBottom).setMinimumHeight(findViewById(R.id.bufferBottom).getHeight()+(display.getHeight()*sharedPref.getInt("overscan", 0)/200));
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -81,7 +87,6 @@ public class FramerDaydreamService extends DreamService {
             ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
         } else {
             myImageView.setImageResource(R.drawable.framer_banner);
-            //TODO make image resize to fill bounds
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
