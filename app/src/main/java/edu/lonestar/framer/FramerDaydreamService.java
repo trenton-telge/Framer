@@ -28,7 +28,7 @@ import edu.lonestar.framer.util.RemoteImage;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerDaydreamService extends DreamService {
     SharedPreferences sharedPref;
-    static int color = Color.rgb(1,1,1);
+    static int color = Color.rgb(255,255,255);
     static boolean wantsAdaptive = false;
     @Override
     public void onAttachedToWindow() {
@@ -119,7 +119,7 @@ public class FramerDaydreamService extends DreamService {
                 if (wantsAdaptive) {
                     color = calculateAverageColor(myBitmap, 1);
                 } else {
-                    color = Color.rgb(1,1,1);
+                    color = Color.rgb(255,255,255);
                 }
                 return myBitmap;
             } catch (IOException e) {
