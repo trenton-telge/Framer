@@ -1,15 +1,14 @@
 package edu.lonestar.framer;
+import android.graphics.Color;
 import android.os.AsyncTask;
-import android.util.Log;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Vector;
-import java.util.logging.Logger;
-
+import android.graphics.Bitmap;
 import edu.lonestar.framer.util.RemoteImage;
+
 /**
  * Created by LUONG LUONG on 1/27/2018.
  */
@@ -17,18 +16,18 @@ import edu.lonestar.framer.util.RemoteImage;
 
 public class DownloadDaemon
 {
+
     static Vector<RemoteImage> obfiltered = new Vector<>();
     static Vector<RemoteImage> obunfiltered = new Vector<>();
     public void parseString()
     {
-        new RefreshDataTask().execute(new Object());
+
     }
     static class RefreshDataTask extends AsyncTask<Object, Object, Void> {
 
         @Override
         protected Void doInBackground(Object... objects) {
-            try
-            {
+            try {
                 // Get http response, include try catch for handle exception
                 URL url = new URL("http://eventhorizonwebdesign.com/framed/api/index.php/images");
                 URLConnection urlConnection = url.openConnection();//url from string
@@ -43,29 +42,57 @@ public class DownloadDaemon
                 }
                 String result = sb.toString();  //set the result string to fully build appendix
                 //Vector String to store json lists and
-                String f = "\"\n {4}";
-                String[] strings = result.split(f);
+                Vector<String> strings = new Vector<>();// Store the Json Lists
+                strings.add(result.substring(0, result.indexOf("},{") + 1)); // copy to vector
+                while (result.contains("},{")) {
+                    result = result.substring(result.indexOf("},{") + 1, result.length());
+                    strings.add(result.substring(0, result.indexOf("},{") + 1));
+                }
 
                 //  for loop to store in unfiltered vector
                 obunfiltered = new Vector<>();
-                for (String s: strings)
-                {
-                    s = s+ "\"";
-                    RemoteImage r = new RemoteImage(s);
-                        obunfiltered.addElement(new RemoteImage(s));
+                for (String s : strings) {
+                    obunfiltered.addElement(new RemoteImage(s));
                 }
                 obfiltered = new Vector<>();
-                for (RemoteImage ob : obunfiltered){
+                for (RemoteImage ob : obunfiltered) {
                     //TODO if ob.artist is a checked artist, add to opfiltered
+
                 }
-
-
             }
+
+
             catch(Exception e)
             {
                 e.printStackTrace();
             }
             return null;
+        }
+// finding average number of pixels in each color
+        public void adt(Bitmap b)
+        {
+
+            ; //assign your bitmap here
+            int redColors = 0;
+            int greenColors = 0;
+            int blueColors = 0;
+            int pixelCount = 0;
+
+            for (int y = 0; y < b.getHeight(); y++)
+            {
+                for (int x = 0; x < b.getWidth(); x++)
+                {
+                    int c = b.getPixel(x, y);
+                    pixelCount++;
+                    redColors += Color.red(c);
+                    greenColors += Color.green(c);
+                    blueColors += Color.blue(c);
+                }
+            }
+            // calculate average of bitmap r,g,b values
+            int red = (redColors/pixelCount);
+            int green = (greenColors/pixelCount);
+            int blue = (blueColors/pixelCount);
         }
 
         @Override
