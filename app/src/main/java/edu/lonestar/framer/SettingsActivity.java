@@ -102,7 +102,7 @@ public class SettingsActivity extends Activity {
                 // converting the number
                 int amount = Integer.parseInt(get_overscan.getText().toString());
                 c.putInt("overscan",amount);
-                c.apply();
+                c.commit();
 
             }
         });
@@ -125,7 +125,7 @@ public class SettingsActivity extends Activity {
                 // converting the number
                 int number = Integer.parseInt(minutes_changes.getText().toString());
                 t.putInt("length_of_time",number );
-                t.apply();
+                t.commit();
 
             }
         });
