@@ -50,15 +50,12 @@ public class FramerDaydreamService extends DreamService {
     public void onDreamingStarted() {
         super.onDreamingStarted();
         displayNewImage();
-        //TODO set timer on next displayNewImage call
         /*
-        TODO set the following:
-            image source
+        TODO set the following
             buffer (overscan + 3 in)
-            text
         */
 
-
+        //TODO set timer on next displayNewImage call
     }
 
     @Override
@@ -70,12 +67,11 @@ public class FramerDaydreamService extends DreamService {
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-
-        // TODO: Dismantle resources
     }
 
     private void displayNewImage(){
         RemoteImage imageToDisplay = DownloadDaemon.obfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obfiltered.size()+ 1));
+        new DownloadTask().execute(imageToDisplay.getUrl());
         ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
         ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"),"%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
     }
