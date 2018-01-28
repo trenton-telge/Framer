@@ -3,6 +3,7 @@
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="default_matting_color">#cd757575</color>
     <color name="nameplate_background">#ac000000</color>
+    <color name="theme_color">#534741</color>
     <color name="fastlane_background">#0096a6</color>
     <color name="search_opaque">#ffaa3f</color>
     <color name="selected_background">#ffaa3f</color>
