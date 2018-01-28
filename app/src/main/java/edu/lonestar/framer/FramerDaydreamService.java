@@ -69,7 +69,7 @@ public class FramerDaydreamService extends DreamService {
             public void run() {
                 displayNewImage();
             }
-        }, sharedPref.getInt("length_of_time", 30)*1000);
+        }, sharedPref.getInt("length_of_time", 5)*1000);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class FramerDaydreamService extends DreamService {
                 public void run() {
                     displayNewImage();
                 }
-            }, 500);
+            }, 2000);
         }
         if (sharedPref.getBoolean("display_nameplate", false)) {
             findViewById(R.id.nameplateLayout).setVisibility(View.VISIBLE);
