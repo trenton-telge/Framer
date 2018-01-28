@@ -42,7 +42,7 @@
             app:layout_constraintStart_toStartOf="@+id/list" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/displayNameplateSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
@@ -54,18 +54,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="42dp"
-            app:layout_constraintStart_toStartOf="@+id/switch1"
-            app:layout_constraintTop_toBottomOf="@+id/switch1" />
+            app:layout_constraintStart_toStartOf="@+id/displayNameplateSwitch"
+            app:layout_constraintTop_toBottomOf="@+id/displayNameplateSwitch" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/displayNameplateSwitchLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
             android:text="Display artist name and date"
             android:textColor="#000000"
-            app:layout_constraintTop_toTopOf="@+id/switch1"
-            app:layout_constraintStart_toEndOf="@+id/switch1" />
+            app:layout_constraintStart_toEndOf="@+id/displayNameplateSwitch"
+            app:layout_constraintTop_toTopOf="@+id/displayNameplateSwitch" />
 
         <TextView
             android:id="@+id/textView3"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:text="Adaptive matting color"
             android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/displayNameplateSwitchLabel"
             app:layout_constraintBottom_toBottomOf="@+id/switch2" />
 
         <TextView
@@ -109,6 +109,7 @@
             app:layout_constraintEnd_toStartOf="@+id/textView3" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -121,10 +122,14 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:text="Button"
-            tools:layout_editor_absoluteX="159dp"
-            tools:layout_editor_absoluteY="382dp"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
     </android.support.constraint.ConstraintLayout>

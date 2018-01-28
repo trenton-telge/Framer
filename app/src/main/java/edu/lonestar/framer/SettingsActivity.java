@@ -18,7 +18,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import java.util.Vector;
 
@@ -42,6 +44,22 @@ public class SettingsActivity extends Activity {
                 // setting the adapter
         new DownloadDaemon().parseString();
         list_view_artists.setAdapter(dataadapter);
+
+
+        //
+        //
+        final Switch displayNameplateSwitch = findViewById(R.id.displayNameplateSwitch);
+        displayNameplateSwitch.setChecked(sharedPref.getBoolean("display_nameplate", false));
+        displayNameplateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor e = sharedPref.edit();
+                e.putBoolean("display_nameplate", displayNameplateSwitch.isChecked());
+                e.apply();
+            }
+        });
+        //
+        //
     }
 
     public static Vector<ArtistSwitchModel> refreshArtistSwitchVector(){
