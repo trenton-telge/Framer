@@ -18,7 +18,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 
@@ -49,8 +52,56 @@ public class SettingsActivity extends Activity {
         // settings id's
         final Switch Adaptive_matting = findViewById(R.id.switch2);
         final Switch displayNameplateSwitch = findViewById(R.id.displayNameplateSwitch);
+        final EditText minutes_changes = findViewById(R.id.editText);
+        final EditText get_overscan = findViewById(R.id.editText3);
 
-        Adaptive_matting.setChecked(sharedPref.getBoolean("display_nameplate", false));
+        // setting listiners
+        get_overscan.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                SharedPreferences.Editor c = sharedPref.edit();
+                // just saving whether the adaptive matting is on or not
+                // converting the number
+                int number = Integer.parseInt(get_overscan.getText().toString());
+                c.putInt("overscan",number );
+                c.apply();
+
+            }
+        });
+
+        minutes_changes.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                SharedPreferences.Editor t = sharedPref.edit();
+                // just saving whether the adaptive matting is on or not
+                // converting the number
+                int number = Integer.parseInt(minutes_changes.getText().toString());
+                t.putInt("length_of_time",number );
+                t.apply();
+
+            }
+        });
+        Adaptive_matting.setChecked(sharedPref.getBoolean("adaptive_matting", false));
         Adaptive_matting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
