@@ -15,7 +15,6 @@
             android:layout_width="3in"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:backgroundTint="@android:color/white"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -23,7 +22,6 @@
             android:layout_width="3in"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:backgroundTint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bufferLeft" />
 

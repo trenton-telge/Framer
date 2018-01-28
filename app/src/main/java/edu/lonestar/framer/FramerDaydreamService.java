@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -28,6 +29,8 @@ import edu.lonestar.framer.util.RemoteImage;
 public class FramerDaydreamService extends DreamService {
     SharedPreferences sharedPref;
     static ImageView myImageView;
+    static int color = Color.rgb(1,1,1);
+    static boolean wantsAdaptive = false;
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -98,8 +101,9 @@ public class FramerDaydreamService extends DreamService {
         if (sharedPref.getBoolean("display_nameplate", false)) {
             findViewById(R.id.nameplateLayout).setVisibility(View.VISIBLE);
         } else findViewById(R.id.nameplateLayout).setVisibility(View.INVISIBLE);
+        wantsAdaptive = sharedPref.getBoolean("adaptive_matting", false);
     }
-    static class DownloadTask extends AsyncTask<String,Object,Bitmap>{
+    class DownloadTask extends AsyncTask<String,Object,Bitmap>{
 
         @Override
         protected Bitmap doInBackground(String... strings) {
@@ -110,6 +114,11 @@ public class FramerDaydreamService extends DreamService {
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                if (wantsAdaptive) {
+                    color = calculateAverageColor(myBitmap, 1);
+                } else {
+                    color = Color.rgb(1,1,1);
+                }
                 return myBitmap;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -119,7 +128,28 @@ public class FramerDaydreamService extends DreamService {
 
         protected void onPostExecute(Bitmap result) {
             myImageView.setImageBitmap(result);
+            findViewById(R.id.bufferBottom).setBackgroundColor(color);
+            findViewById(R.id.bufferTop).setBackgroundColor(color);
+            findViewById(R.id.bufferLeft).setBackgroundColor(color);
+            findViewById(R.id.bufferRight).setBackgroundColor(color);
         }
+    }
+
+    public int calculateAverageColor(android.graphics.Bitmap bitmap, int pixelSpacing) {
+        int R = 0; int G = 0; int B = 0;
+        int height = bitmap.getHeight();
+        int width = bitmap.getWidth();
+        int n = 0;
+        int[] pixels = new int[width * height];
+        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        for (int i = 0; i < pixels.length; i += pixelSpacing) {
+            int color = pixels[i];
+            R += Color.red(color);
+            G += Color.green(color);
+            B += Color.blue(color);
+            n++;
+        }
+        return Color.rgb(R / n, G / n, B / n);
     }
 
 }

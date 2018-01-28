@@ -43,24 +43,17 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
         sharedPref = this.getSharedPreferences("framer", Context.MODE_PRIVATE);
         // setting the id to the list view
-        final ListView list_view_artists = (ListView) findViewById(R.id.list);
 
         // creating the adapter object
         dataadapter = new ArtistListAdapter(this, refreshArtistSwitchVector());
                 // setting the adapter
         new DownloadDaemon().refresh();
 
-        list_view_artists.setAdapter(dataadapter);
         // settings id's
         final Switch Adaptive_matting = findViewById(R.id.switch2);
         final Switch displayNameplateSwitch = findViewById(R.id.displayNameplateSwitch);
-        final EditText minutes_changes = findViewById(R.id.editText);
-        final EditText get_overscan = findViewById(R.id.editText3);
         final TextView displayname_test = findViewById(R.id.displayNameplateSwitchLabel);
         final TextView matting = findViewById(R.id.textView3);
-        final TextView delay = findViewById(R.id.textView4);
-        final TextView set_overscan = findViewById(R.id.textView2);
-        final TextView title = findViewById(R.id.textView);
         // populating from shared preferences
         // had to use not because seemded to be on
         SharedPreferences preferences  = PreferenceManager.getDefaultSharedPreferences(this);
@@ -77,58 +70,7 @@ public class SettingsActivity extends Activity {
         int minutes = preferences.getInt("length_of_time",0);
         int overscan_amount = preferences.getInt("overscan",0);
 
-        // setting the overscan
-        minutes_changes.setText(String.valueOf(minutes));
-        get_overscan.setText(String.valueOf(overscan_amount));
 
-
-
-        // setting listiners
-        get_overscan.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor c = sharedPref.edit();
-                // just saving whether the adaptive matting is on or not
-                // converting the number
-                int amount = Integer.parseInt(get_overscan.getText().toString());
-                c.putInt("overscan",amount);
-                c.commit();
-
-            }
-        });
-
-        minutes_changes.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor t = sharedPref.edit();
-                // just saving whether the adaptive matting is on or not
-                // converting the number
-                int number = Integer.parseInt(minutes_changes.getText().toString());
-                t.putInt("length_of_time",number );
-                t.commit();
-
-            }
-        });
         Adaptive_matting.setChecked(sharedPref.getBoolean("adaptive_matting", false));
         Adaptive_matting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
