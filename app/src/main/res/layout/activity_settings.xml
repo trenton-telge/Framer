@@ -5,7 +5,7 @@
     android:id="@+id/main_browse_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff">
+    android:background="#302013">
 
     <!-- Screen elements that can render outside the overscan safe area go here -->
 
@@ -36,7 +36,7 @@
             android:layout_marginStart="72dp"
             android:layout_marginTop="21dp"
             android:text="Artists to Display"
-            android:textColor="#000000"
+            android:textColor="#ffff"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="@+id/list"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,21 +45,28 @@
             android:id="@+id/displayNameplateSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="37dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="55dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.07999998" />
 
         <Switch
             android:id="@+id/switch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.035"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/displayNameplateSwitch" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.38" />
 
         <TextView
             android:id="@+id/displayNameplateSwitchLabel"
@@ -70,33 +77,32 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Display artist name and date"
-            android:textColor="#000000"
+            android:textColor="#ffff"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.289"
+            app:layout_constraintHorizontal_bias="0.251"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.128"
-            android:textSize="24sp"
-            />
+            app:layout_constraintVertical_bias="0.06999999" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Adaptive matting color"
-            android:textColor="#000000"
-            android:textSize="24sp"
+            android:textColor="#ffff"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.301"
+            app:layout_constraintHorizontal_bias="0.275"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.29" />
+            app:layout_constraintVertical_bias="0.38" />
 
         <TextView
             android:id="@+id/textView4"
@@ -106,15 +112,15 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Delay for Transition (min)     "
-            android:textColor="#000000"
-            android:textSize="10sp"
+            android:text="Delay for Transition"
+            android:textColor="#ffff"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/list"
-            app:layout_constraintHorizontal_bias="0.58"
+            app:layout_constraintHorizontal_bias="0.67"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.449" />
+            app:layout_constraintVertical_bias="0.68" />
 
         <EditText
             android:id="@+id/editText3"
@@ -126,14 +132,14 @@
             android:layout_marginTop="8dp"
             android:hint="Enter numbers here"
             android:inputType="numberDecimal"
-            android:textColor="#000000"
-            android:textColorHint="#D3D3D3"
+            android:textColor="#fffff"
+            android:textColorHint="#ffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.011"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.684" />
+            app:layout_constraintVertical_bias="0.96" />
 
         <TextView
             android:id="@+id/textView2"
@@ -144,13 +150,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Set OverScan"
-            android:textColor="#000000"
+            android:textColor="#ffff"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.311"
+            app:layout_constraintHorizontal_bias="0.304"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.681" />
+            app:layout_constraintVertical_bias="0.96" />
 
         <EditText
             android:id="@+id/editText"
@@ -168,7 +175,7 @@
             app:layout_constraintHorizontal_bias="0.028"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.455" />
+            app:layout_constraintVertical_bias="0.68" />
 
 
     </android.support.constraint.ConstraintLayout>

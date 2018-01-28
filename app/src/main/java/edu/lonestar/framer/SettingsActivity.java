@@ -17,18 +17,25 @@ package edu.lonestar.framer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Vector;
 
 import edu.lonestar.framer.util.ArtistSwitchModel;
 import edu.lonestar.framer.util.RemoteImage;
+
+import static java.lang.reflect.Array.getInt;
 
 public class SettingsActivity extends Activity {
 
@@ -36,7 +43,7 @@ public class SettingsActivity extends Activity {
     ArtistListAdapter dataadapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+// repopulate fields
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         sharedPref = this.getSharedPreferences("framer", Context.MODE_PRIVATE);
@@ -54,6 +61,31 @@ public class SettingsActivity extends Activity {
         final Switch displayNameplateSwitch = findViewById(R.id.displayNameplateSwitch);
         final EditText minutes_changes = findViewById(R.id.editText);
         final EditText get_overscan = findViewById(R.id.editText3);
+        final TextView displayname_test = findViewById(R.id.displayNameplateSwitchLabel);
+        final TextView matting = findViewById(R.id.textView3);
+        final TextView delay = findViewById(R.id.textView4);
+        final TextView set_overscan = findViewById(R.id.textView2);
+        final TextView title = findViewById(R.id.textView);
+        // populating from shared preferences
+        SharedPreferences preferences  = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getBoolean("adaptive_matting",false))
+        {
+            // moving the slider
+            Adaptive_matting.toggle();
+        }
+        if (preferences.getBoolean("display_nameplate",false))
+        {
+            // moving the slider
+            displayNameplateSwitch.toggle();
+        }
+        int minutes = preferences.getInt("length_of_time",0);
+        int overscan_amount = preferences.getInt("overscan",0);
+
+        // setting the overscan
+        minutes_changes.setText(String.valueOf(minutes));
+        get_overscan.setText(String.valueOf(overscan_amount));
+
+
 
         // setting listiners
         get_overscan.addTextChangedListener(new TextWatcher() {
