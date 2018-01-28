@@ -67,13 +67,14 @@ public class SettingsActivity extends Activity {
         final TextView set_overscan = findViewById(R.id.textView2);
         final TextView title = findViewById(R.id.textView);
         // populating from shared preferences
+        // had to use not because seemded to be on
         SharedPreferences preferences  = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.getBoolean("adaptive_matting",false))
+        if (!preferences.getBoolean("adaptive_matting",false))
         {
             // moving the slider
             Adaptive_matting.toggle();
         }
-        if (preferences.getBoolean("display_nameplate",false))
+        if (!preferences.getBoolean("display_nameplate",false))
         {
             // moving the slider
             displayNameplateSwitch.toggle();
