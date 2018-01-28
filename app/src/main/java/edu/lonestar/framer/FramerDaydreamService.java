@@ -50,18 +50,22 @@ public class FramerDaydreamService extends DreamService {
     public void onDreamingStarted() {
         super.onDreamingStarted();
         displayNewImage();
-        /*
-        TODO set the following
-            buffer (overscan + 3 in)
-        */
+        //TODO set matting size due to overscan
 
-        //TODO set timer on next displayNewImage call
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        displayNewImage();
+                    }
+                },
+                sharedPref.getInt("length_of_time", 30)*1000
+        );
     }
 
     @Override
     public void onDreamingStopped() {
         super.onDreamingStopped();
-
     }
 
     @Override
@@ -77,6 +81,7 @@ public class FramerDaydreamService extends DreamService {
             ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
         } else {
             myImageView.setImageResource(R.drawable.framer_banner);
+            //TODO make image resize to fill bounds
             //TODO wait 500 milli and recursively call
         }
         if (sharedPref.getBoolean("display_nameplate", false)) {
