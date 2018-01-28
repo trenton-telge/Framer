@@ -16,10 +16,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
 import edu.lonestar.framer.util.RemoteImage;
 
@@ -72,22 +69,14 @@ public class FramerDaydreamService extends DreamService {
     }
 
     private void displayNewImage(){
-        if (DownloadDaemon.obfiltered.size() > 0) {
-            RemoteImage imageToDisplay = DownloadDaemon.obfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obfiltered.size() + 1));
+        if (DownloadDaemon.obunfiltered.size() > 0) {
+            RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obunfiltered.size() + 1));
             new DownloadTask().execute(imageToDisplay.getUrl());
             ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
             ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
         } else {
             myImageView.setImageResource(R.drawable.framer_banner);
-            new java.util.Timer().schedule(
-                    new java.util.TimerTask() {
-                        @Override
-                        public void run() {
-                            displayNewImage();
-                        }
-                    },
-                    500
-            );
+            //TODO wait 500 milli and recursively call
         }
     }
     static class DownloadTask extends AsyncTask<String,Object,Bitmap>{
