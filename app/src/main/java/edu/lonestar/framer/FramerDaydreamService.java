@@ -7,11 +7,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.service.dreams.DreamService;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 import edu.lonestar.framer.util.RemoteImage;
@@ -26,7 +28,6 @@ import edu.lonestar.framer.util.RemoteImage;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerDaydreamService extends DreamService {
     static ImageView myImageView;
-
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -75,7 +76,8 @@ public class FramerDaydreamService extends DreamService {
 
     private void displayNewImage(){
         RemoteImage imageToDisplay = DownloadDaemon.obfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obfiltered.size()+ 1));
-
+        ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
+        ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"),"%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
     }
     static class DownloadTask extends AsyncTask<String,Object,Bitmap>{
 
