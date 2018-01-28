@@ -7,7 +7,7 @@ import android.app.Activity;
  */
 
 public class ArtistSwitch  extends Activity{
-   public  boolean selected;
+   public  boolean selected = false;
     public String name;
    public  ArtistSwitch(String artist, boolean select)
 {
@@ -16,6 +16,13 @@ public class ArtistSwitch  extends Activity{
     this.name = artist;
 
 }
+// creating second one for just string
+    public ArtistSwitch(String artist)
+    {
+        //just setting the name
+        this.name = artist;
+    }
+
     public String getName(){
         return this.name;
     }

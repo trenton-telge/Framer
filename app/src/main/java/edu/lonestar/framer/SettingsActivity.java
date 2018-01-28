@@ -16,8 +16,12 @@ package edu.lonestar.framer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
-
+import android.widget.TextView;
+import org.w3c.dom.Text;
+import static edu.lonestar.framer.Custom_adapter.saved_data_artists;
 import java.util.Vector;
 
 import edu.lonestar.framer.util.ArtistSwitch;
@@ -27,8 +31,11 @@ public class SettingsActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+
         // setting the id to the list view
         final ListView list_view_authors = (ListView) findViewById(R.id.list);
         // creating test string vector
@@ -44,4 +51,6 @@ public class SettingsActivity extends Activity {
                 // setting the adapter
         list_view_authors.setAdapter(dataadapter);
     }
+
 }
+
