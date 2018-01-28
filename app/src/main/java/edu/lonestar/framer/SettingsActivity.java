@@ -105,8 +105,8 @@ public class SettingsActivity extends Activity {
                 SharedPreferences.Editor c = sharedPref.edit();
                 // just saving whether the adaptive matting is on or not
                 // converting the number
-                int number = Integer.parseInt(get_overscan.getText().toString());
-                c.putInt("overscan",number );
+                int amount = Integer.parseInt(get_overscan.getText().toString());
+                c.putInt("overscan",amount);
                 c.apply();
 
             }
