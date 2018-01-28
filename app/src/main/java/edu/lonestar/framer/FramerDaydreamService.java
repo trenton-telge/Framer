@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.service.dreams.DreamService;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,6 +79,9 @@ public class FramerDaydreamService extends DreamService {
             myImageView.setImageResource(R.drawable.framer_banner);
             //TODO wait 500 milli and recursively call
         }
+        if (sharedPref.getBoolean("display_nameplate", false)) {
+            findViewById(R.id.nameplateLayout).setVisibility(View.VISIBLE);
+        } else findViewById(R.id.nameplateLayout).setVisibility(View.INVISIBLE);
     }
     static class DownloadTask extends AsyncTask<String,Object,Bitmap>{
 
