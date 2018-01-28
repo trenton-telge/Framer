@@ -16,18 +16,15 @@ package edu.lonestar.framer;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import org.w3c.dom.Text;
-import static edu.lonestar.framer.Custom_adapter.saved_data_artists;
+
 import java.util.Vector;
 
-import edu.lonestar.framer.util.ArtistSwitch;
+import edu.lonestar.framer.util.ArtistSwitchModel;
+import edu.lonestar.framer.util.RemoteImage;
 
 public class SettingsActivity extends Activity {
-    Custom_adapter dataadapter;
+    ArtistListAdapter dataadapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,20 +34,29 @@ public class SettingsActivity extends Activity {
 
 
         // setting the id to the list view
-        final ListView list_view_authors = (ListView) findViewById(R.id.list);
-        // creating test string vector
-        Vector<ArtistSwitch> testing = new Vector<ArtistSwitch>();
+        final ListView list_view_artists = (ListView) findViewById(R.id.list);
 
-        for (int x = 10; x<100;x++)
-        {
-            ArtistSwitch tester = new ArtistSwitch("Hussein",true);
-            testing.add(tester);
-        }
         // creating the adapter object
-        dataadapter = new Custom_adapter(this,testing);
+        dataadapter = new ArtistListAdapter(this, refreshArtistSwitchVector());
                 // setting the adapter
-        list_view_authors.setAdapter(dataadapter);
+        new DownloadDaemon().parseString();
+        list_view_artists.setAdapter(dataadapter);
     }
 
+    public static Vector<ArtistSwitchModel> refreshArtistSwitchVector(){
+        Vector<ArtistSwitchModel> finalArtists = new Vector<>();
+        for (RemoteImage i: DownloadDaemon.obunfiltered){
+            boolean found = false;
+            for (ArtistSwitchModel s : finalArtists){
+                if (s.name.equals(i.getArtist())){
+                    found = true;
+                }
+            }
+            if (!found){
+                finalArtists.add(new ArtistSwitchModel(i.getArtist()));
+            }
+        }
+        return finalArtists;
+    }
 }
 
