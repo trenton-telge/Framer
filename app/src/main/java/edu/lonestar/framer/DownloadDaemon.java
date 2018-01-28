@@ -55,6 +55,7 @@ public class DownloadDaemon
                 }
                 obfiltered = new Vector<>();
                 for (RemoteImage ob : obunfiltered){
+
                     //TODO if ob.artist is a checked artist, add to opfiltered
                 }
 

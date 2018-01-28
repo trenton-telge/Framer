@@ -15,6 +15,8 @@
 package edu.lonestar.framer;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -24,14 +26,13 @@ import edu.lonestar.framer.util.ArtistSwitchModel;
 import edu.lonestar.framer.util.RemoteImage;
 
 public class SettingsActivity extends Activity {
+    SharedPreferences sharedPref = getApplication().getSharedPreferences("framer", Context.MODE_PRIVATE);
     ArtistListAdapter dataadapter;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
 
         // setting the id to the list view
         final ListView list_view_artists = (ListView) findViewById(R.id.list);
