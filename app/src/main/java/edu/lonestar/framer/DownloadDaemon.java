@@ -1,11 +1,13 @@
 package edu.lonestar.framer;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import edu.lonestar.framer.util.RemoteImage;
 /**
@@ -19,7 +21,7 @@ public class DownloadDaemon
     static Vector<RemoteImage> obunfiltered = new Vector<>();
     public void parseString()
     {
-
+        new RefreshDataTask().execute(new Object());
     }
     static class RefreshDataTask extends AsyncTask<Object, Object, Void> {
 
@@ -53,6 +55,7 @@ public class DownloadDaemon
                 for (String s: strings)
                 {
                     obunfiltered.addElement(new RemoteImage(s));
+                    Log.e("",s);
                 }
                 obfiltered = new Vector<>();
                 for (RemoteImage ob : obunfiltered){
