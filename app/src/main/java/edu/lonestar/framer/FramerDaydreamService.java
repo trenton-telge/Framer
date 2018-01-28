@@ -28,7 +28,6 @@ import edu.lonestar.framer.util.RemoteImage;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerDaydreamService extends DreamService {
     SharedPreferences sharedPref;
-    static ImageView myImageView;
     static int color = Color.rgb(1,1,1);
     static boolean wantsAdaptive = false;
     @Override
@@ -48,7 +47,6 @@ public class FramerDaydreamService extends DreamService {
 
         // Set the content view, just like you would with an Activity.
         setContentView(R.layout.framer_daydream);
-        myImageView = findViewById(R.id.imageView);
         sharedPref = getApplication().getSharedPreferences("framer", Context.MODE_PRIVATE);
     }
 
@@ -58,7 +56,11 @@ public class FramerDaydreamService extends DreamService {
         displayNewImage();
         //TODO set matting size due to overscan
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
+        Display display = null;
+        if (wm != null) {
+            display = wm.getDefaultDisplay();
+        }
+        assert display != null;
         findViewById(R.id.bufferLeft).setMinimumWidth(findViewById(R.id.bufferLeft).getWidth()+(display.getWidth()*sharedPref.getInt("overscan", 0)/200));
         findViewById(R.id.bufferRight).setMinimumWidth(findViewById(R.id.bufferRight).getWidth()+(display.getWidth()*sharedPref.getInt("overscan", 0)/200));
         findViewById(R.id.bufferTop).setMinimumHeight(findViewById(R.id.bufferTop).getHeight()+(display.getHeight()*sharedPref.getInt("overscan", 0)/200));
@@ -89,7 +91,7 @@ public class FramerDaydreamService extends DreamService {
             ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
             ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
         } else {
-            myImageView.setImageResource(R.drawable.framer_banner);
+            ((ImageView)findViewById(R.id.imageView)).setImageResource(R.drawable.framer_banner);
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -127,7 +129,7 @@ public class FramerDaydreamService extends DreamService {
         }
 
         protected void onPostExecute(Bitmap result) {
-            myImageView.setImageBitmap(result);
+            ((ImageView)findViewById(R.id.imageView)).setImageBitmap(result);
             findViewById(R.id.bufferBottom).setBackgroundColor(color);
             findViewById(R.id.bufferTop).setBackgroundColor(color);
             findViewById(R.id.bufferLeft).setBackgroundColor(color);
