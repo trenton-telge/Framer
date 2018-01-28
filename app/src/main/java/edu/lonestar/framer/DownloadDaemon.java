@@ -13,8 +13,8 @@ import edu.lonestar.framer.util.RemoteImage;
 
 public class DownloadDaemon
 {
-    static Vector<RemoteImage> obfiltered;
-    static Vector<RemoteImage> obunfiltered;
+    static Vector<RemoteImage> obfiltered = new Vector<>();
+    static Vector<RemoteImage> obunfiltered = new Vector<>();
     public void parseString()
     {
         try
