@@ -1,5 +1,7 @@
 package edu.lonestar.framer.util;
 
+import android.util.Log;
+
 /**
  * Created by LUONG LUONG on 1/27/2018.
  */
@@ -45,6 +47,7 @@ public class RemoteImage
         json=json.substring(json.indexOf(":")+3);
         this.url = (json.substring(0, json.indexOf("\"")));
         //title
+        json=json.substring(json.indexOf(":")+3);
         json=json.substring(json.indexOf(":")+3);
         this.title = (json.substring(0, json.indexOf("\"")));
     }

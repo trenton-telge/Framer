@@ -1,11 +1,13 @@
 package edu.lonestar.framer;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import edu.lonestar.framer.util.RemoteImage;
 /**
@@ -19,7 +21,7 @@ public class DownloadDaemon
     static Vector<RemoteImage> obunfiltered = new Vector<>();
     public void parseString()
     {
-
+        new RefreshDataTask().execute(new Object());
     }
     static class RefreshDataTask extends AsyncTask<Object, Object, Void> {
 
@@ -41,23 +43,20 @@ public class DownloadDaemon
                 }
                 String result = sb.toString();  //set the result string to fully build appendix
                 //Vector String to store json lists and
-                Vector<String> strings= new Vector<>();// Store the Json Lists
-                strings.add(result.substring(0, result.indexOf("},{") + 1)); // copy to vector
-                while (result.contains("},{")) {
-                    result = result.substring(result.indexOf("},{") + 1, result.length());
-                    strings.add(result.substring(0, result.indexOf("},{") + 1));
-                }
+                String f = "\"\n {4}";
+                String[] strings = result.split(f);
 
                 //  for loop to store in unfiltered vector
                 obunfiltered = new Vector<>();
                 for (String s: strings)
                 {
-                    obunfiltered.addElement(new RemoteImage(s));
+                    s = s+ "\"";
+                    RemoteImage r = new RemoteImage(s);
+                        obunfiltered.addElement(new RemoteImage(s));
                 }
                 obfiltered = new Vector<>();
                 for (RemoteImage ob : obunfiltered){
                     //TODO if ob.artist is a checked artist, add to opfiltered
-
                 }
 
 
