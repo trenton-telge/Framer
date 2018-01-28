@@ -37,7 +37,7 @@ public class RemoteImage
         this.year = Integer.parseInt(json.substring(0, json.indexOf(",")));
         //Width
         json=json.substring(json.indexOf(":")+2); // start to count after the colon
-        this.height = Integer.parseInt(json.substring(0, json.indexOf(",")));
+        this.height = Integer.parseInt(json.substring(0, json.indexOf(",")));// start at the prvious value, ini to 0 and count on
         //artist
         json=json.substring(json.indexOf(":")+2);
         this.width = Integer.parseInt(json.substring(0, json.indexOf(",")));

@@ -29,23 +29,24 @@ public class DownloadDaemon
             {
                 // Get http response, include try catch for handle exception
                 URL url = new URL("http://eventhorizonwebdesign.com/framed/api/index.php/images");
-                URLConnection urlConnection = url.openConnection();
-                InputStream is = urlConnection.getInputStream();
-                InputStreamReader isr = new InputStreamReader(is);
+                URLConnection urlConnection = url.openConnection();//url from string
+                InputStream is = urlConnection.getInputStream();    //creating inputstream from url connection
+                InputStreamReader isr = new InputStreamReader(is);  // create buffer from inputstream
 
-                int numCharsRead;
-                char[] charArray = new char[1024];
-                StringBuilder sb = new StringBuilder();
-                while ((numCharsRead = isr.read(charArray)) > 0) {
-                    sb.append(charArray, 0, numCharsRead);
+                int numCharsRead;   //declare position
+                char[] charArray = new char[1024];  //set buffer size
+                StringBuilder sb = new StringBuilder();//Initialize string builder
+                while ((numCharsRead = isr.read(charArray)) > 0) {  //while the file is not ended
+                    sb.append(charArray, 0, numCharsRead);  // append the next 1024 bytes
                 }
-                String result = sb.toString();
-                new RemoteImage(result);
+                String result = sb.toString();  //set the result string to fully build appendix
                 //Vector String to store json lists and
                 Vector<String> strings= new Vector<>();// Store the Json Lists
                 strings.add(result.substring(0, result.indexOf("},{") + 1)); // copy to vector
-                result = result.substring(result.indexOf("},{") + 1, result.length());
-                // Remove the one which is just copied
+                while (result.contains("},{")) {
+                    result = result.substring(result.indexOf("},{") + 1, result.length());
+                    strings.add(result.substring(0, result.indexOf("},{") + 1));
+                }
 
                 //  for loop to store in unfiltered vector
                 obunfiltered = new Vector<>();
@@ -55,8 +56,8 @@ public class DownloadDaemon
                 }
                 obfiltered = new Vector<>();
                 for (RemoteImage ob : obunfiltered){
-
                     //TODO if ob.artist is a checked artist, add to opfiltered
+
                 }
 
 
