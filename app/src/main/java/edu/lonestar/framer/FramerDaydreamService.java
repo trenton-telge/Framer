@@ -53,7 +53,7 @@ public class FramerDaydreamService extends DreamService {
     @Override
     public void onDreamingStarted() {
         super.onDreamingStarted();
-        displayNewImage();
+        //displayNewImage();
         //TODO set matting size due to overscan
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         Display display = null;
@@ -71,7 +71,7 @@ public class FramerDaydreamService extends DreamService {
             public void run() {
                 displayNewImage();
             }
-        }, sharedPref.getInt("length_of_time", 5)*1000);
+        }, 0);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class FramerDaydreamService extends DreamService {
     private void displayNewImage(){
         if (DownloadDaemon.obunfiltered.size() > 0) {
             RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obunfiltered.size()));
-            new DownloadTask().execute(imageToDisplay.getUrl());
+            new ImageDownloadTask().execute(imageToDisplay.getUrl());
             ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
             ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
         } else {
@@ -105,12 +105,12 @@ public class FramerDaydreamService extends DreamService {
         } else findViewById(R.id.nameplateLayout).setVisibility(View.INVISIBLE);
         wantsAdaptive = sharedPref.getBoolean("adaptive_matting", false);
     }
-    class DownloadTask extends AsyncTask<String,Object,Bitmap>{
+    class ImageDownloadTask extends AsyncTask<String,Object,Bitmap>{
 
         @Override
         protected Bitmap doInBackground(String... strings) {
             try {
-                URL url = new URL(strings[0]);
+                URL url = new URL(strings[0].trim());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();

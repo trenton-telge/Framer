@@ -29,27 +29,38 @@ public class RemoteImage
 
     public RemoteImage(String json)    // Split Json string
     {
-        json=json.substring(json.indexOf(":")+2);
+        Log.d("Image", json);
+        //id
+        if (json.contains("\":")){json=json.substring(json.indexOf(":")+1);}
+        while (json.startsWith("[")){json=json.substring(1);}
         this.id = Integer.parseInt(json.substring(0, json.indexOf(",")));
+        Log.d("Img", "ID = " + this.id);
         //artist
-        json=json.substring(json.indexOf(":")+3);
+        json=json.substring(json.indexOf(",")+2);
         this.artist = (json.substring(0, json.indexOf("\"")));
-        //height
-        json=json.substring(json.indexOf(":")+2);
+        Log.d("Img", "Artist = " + this.artist);
+        //Year
+        json=json.substring(json.indexOf(",")+1);
         this.year = Integer.parseInt(json.substring(0, json.indexOf(",")));
-        //Width
-        json=json.substring(json.indexOf(":")+2); // start to count after the colon
+        Log.d("Img", "Year = " + this.year);
+        json=json.substring(json.indexOf(",")+1); //TODO skipping empty keywords
+        //Height
+        json=json.substring(json.indexOf(",")+1); // start to count after the colon
         this.height = Integer.parseInt(json.substring(0, json.indexOf(",")));// start at the prvious value, ini to 0 and count on
-        //artist
-        json=json.substring(json.indexOf(":")+2);
+        Log.d("Img", "Height = " + this.height);
+        //Width
+        json=json.substring(json.indexOf(",")+1);
         this.width = Integer.parseInt(json.substring(0, json.indexOf(",")));
+        Log.d("Img", "Width = " + this.width);
         //URL
-        json=json.substring(json.indexOf(":")+3);
+        json=json.substring(json.indexOf(",")+2);
         this.url = (json.substring(0, json.indexOf("\"")));
+        this.url = this.url.replaceAll("/", "");
+        Log.d("Img", "URL = " + this.url);
         //title
-        json=json.substring(json.indexOf(":")+3);
-        json=json.substring(json.indexOf(":")+3);
+        json=json.substring(json.indexOf(",")+2);
         this.title = (json.substring(0, json.indexOf("\"")));
+        Log.d("Img", "Title = " + this.title);
     }
 
     public int getId()

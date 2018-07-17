@@ -31,7 +31,7 @@ public class DownloadDaemon
         protected Void doInBackground(Object... objects) {
             try {
                 // Get http response, include try catch for handle exception
-                URL url = new URL("http://eventhorizonwebdesign.com/framed/api/index.php/images");
+                URL url = new URL("http://eventhorizonwebdesign.com/framed/api/api.php/images");
                 URLConnection urlConnection = url.openConnection();//url from string
                 InputStream is = urlConnection.getInputStream();    //creating inputstream from url connection
                 InputStreamReader isr = new InputStreamReader(is);  // create buffer from inputstream
@@ -44,14 +44,13 @@ public class DownloadDaemon
                 }
                 String result = sb.toString();  //set the result string to fully build appendix
                 //Vector String to store json lists and
-                String f = "\"\n {4}";
+                String f = "],";
                 String[] strings = result.split(f);
-
                 //  for loop to store in unfiltered vector
                 obunfiltered = new Vector<>();
                     for (String s : strings) {
                         s = s+ "\"";
-                        obunfiltered.addElement(new RemoteImage(s));
+                        if (!s.contains("keywords")){obunfiltered.addElement(new RemoteImage(s));}
                     }
             }
 
