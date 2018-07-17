@@ -54,7 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Switch
-            android:id="@+id/switch2"
+            android:id="@+id/nameplateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -72,22 +72,36 @@
             android:layout_marginStart="8dp"
             android:text="Display artist name and date"
             android:textColor="#ffff"
-            android:textSize="30sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/displayNameplateSwitch"
             app:layout_constraintStart_toEndOf="@+id/displayNameplateSwitch"
             app:layout_constraintTop_toTopOf="@+id/displayNameplateSwitch" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/adaptiveMattingLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Adaptive matting color"
             android:textColor="#ffff"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@+id/switch2"
-            app:layout_constraintStart_toEndOf="@+id/switch2"
-            app:layout_constraintTop_toTopOf="@+id/switch2" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/nameplateLabel"
+            app:layout_constraintStart_toEndOf="@+id/nameplateLabel"
+            app:layout_constraintTop_toTopOf="@+id/nameplateLabel" />
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/lb_tv_white"
+            android:text="Start Daydreaming"
+            android:textColor="@color/theme_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!--<TextView
             android:id="@+id/textView4"

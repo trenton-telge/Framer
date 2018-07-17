@@ -16,14 +16,13 @@ package edu.lonestar.framer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -50,10 +49,9 @@ public class SettingsActivity extends Activity {
         new DownloadDaemon().refresh();
 
         // settings id's
-        final Switch Adaptive_matting = findViewById(R.id.switch2);
+        final Switch Adaptive_matting = findViewById(R.id.nameplateLabel);
         final Switch displayNameplateSwitch = findViewById(R.id.displayNameplateSwitch);
-        final TextView displayname_test = findViewById(R.id.displayNameplateSwitchLabel);
-        final TextView matting = findViewById(R.id.textView3);
+        final Button startButton = findViewById(R.id.startButton);
         // populating from shared preferences
         // had to use not because seemded to be on
         SharedPreferences preferences  = PreferenceManager.getDefaultSharedPreferences(this);
@@ -67,6 +65,14 @@ public class SettingsActivity extends Activity {
             // moving the slider
             displayNameplateSwitch.toggle();
         }
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
+                startActivity(intent);
+            }
+        });
         int minutes = preferences.getInt("length_of_time",0);
         int overscan_amount = preferences.getInt("overscan",0);
 
