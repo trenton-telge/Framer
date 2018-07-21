@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.service.dreams.DreamService;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.LinearInterpolator;
@@ -88,7 +89,8 @@ public class FramerClassicDaydreamService extends DreamService {
 
     private void displayNewImage(){
         if (DownloadDaemon.obunfiltered.size() > 0) {
-            RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obunfiltered.size()));
+            int ran = new  Random().nextInt(DownloadDaemon.obunfiltered.size()-2);
+            RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ran);
             new FramerClassicDaydreamService.ImageDownloadTask().execute(imageToDisplay.getUrl());
         } else {
             ((ImageView)findViewById(R.id.imageViewMimic)).setImageResource(R.drawable.framer_banner);

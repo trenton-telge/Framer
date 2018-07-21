@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import edu.lonestar.framer.util.RemoteImage;
@@ -91,7 +92,9 @@ public class FramerDaydreamService extends DreamService {
 
     private void displayNewImage(){
         if (DownloadDaemon.obunfiltered.size() > 0) {
-            RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ThreadLocalRandom.current().nextInt(0, DownloadDaemon.obunfiltered.size()));
+            int ran = new Random().nextInt(DownloadDaemon.obunfiltered.size()-2);
+            RemoteImage imageToDisplay = DownloadDaemon.obunfiltered.elementAt(ran);
+            new FramerDaydreamService.ImageDownloadTask().execute(imageToDisplay.getUrl());
             new ImageDownloadTask().execute(imageToDisplay.getUrl());
             ((TextView) findViewById(R.id.artistText)).setText(imageToDisplay.getArtist());
             ((TextView) findViewById(R.id.titleText)).setText(String.format(new Locale("en"), "%s (%d)", imageToDisplay.getTitle(), imageToDisplay.getYear()));
