@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -60,11 +61,15 @@ public class FramerDaydreamService extends DreamService {
         if (wm != null) {
             display = wm.getDefaultDisplay();
         }
+        Point size = new Point();
+        if (display != null) {
+            display.getSize(size);
+        }
         assert display != null;
-        findViewById(R.id.bufferLeft).setMinimumWidth(findViewById(R.id.bufferLeft).getWidth()+(display.getWidth()*sharedPref.getInt("overscan", 0)/200));
-        findViewById(R.id.bufferRight).setMinimumWidth(findViewById(R.id.bufferRight).getWidth()+(display.getWidth()*sharedPref.getInt("overscan", 0)/200));
-        findViewById(R.id.bufferTop).setMinimumHeight(findViewById(R.id.bufferTop).getHeight()+(display.getHeight()*sharedPref.getInt("overscan", 0)/200));
-        findViewById(R.id.bufferBottom).setMinimumHeight(findViewById(R.id.bufferBottom).getHeight()+(display.getHeight()*sharedPref.getInt("overscan", 0)/200));
+        findViewById(R.id.bufferLeft).setMinimumWidth(findViewById(R.id.bufferLeft).getWidth()+(size.x*sharedPref.getInt("overscan", 0)/200));
+        findViewById(R.id.bufferRight).setMinimumWidth(findViewById(R.id.bufferRight).getWidth()+(size.x*sharedPref.getInt("overscan", 0)/200));
+        findViewById(R.id.bufferTop).setMinimumHeight(findViewById(R.id.bufferTop).getHeight()+(size.y*sharedPref.getInt("overscan", 0)/200));
+        findViewById(R.id.bufferBottom).setMinimumHeight(findViewById(R.id.bufferBottom).getHeight()+(size.y*sharedPref.getInt("overscan", 0)/200));
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
