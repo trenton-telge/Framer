@@ -59,6 +59,8 @@ public class FramerClassicDaydreamService extends DreamService {
         // Set the content view, just like you would with an Activity.
         setContentView(R.layout.framer_classic_daydream);
         sharedPref = getApplication().getSharedPreferences("framer", Context.MODE_PRIVATE);
+        ImageView frame = findViewById(R.id.mimicFrame);
+        frame.setBackground(getDrawable(R.drawable.frame_4k));
     }
 
     @Override
