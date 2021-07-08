@@ -1,13 +1,14 @@
 package edu.lonestar.framer;
+
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Vector;
-import android.graphics.Bitmap;
-import android.util.Log;
 
 import edu.lonestar.framer.util.RemoteImage;
 
