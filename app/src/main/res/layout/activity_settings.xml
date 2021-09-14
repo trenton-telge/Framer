@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     android:background="#302013">
 
-    <!-- Screen elements that can render outside the overscan safe area go here -->
-
     <!-- Nested RelativeLayout with overscan-safe margin -->
     <!-- giving a buffer for the oversscan of about 5%-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,27 +18,6 @@
         android:layout_marginRight="48dp"
         android:layout_marginTop="27dp">
 
-        <!-- Screen elements that need to be within the overscan safe area go here -->
-
-        <!--<ListView
-            android:id="@+id/list"
-            android:layout_width="350dp"
-            android:layout_height="379dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />-->
-
-        <!--<TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="21dp"
-            android:text="Artists to Display"
-            android:textColor="#ffff"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="@+id/list"
-            app:layout_constraintTop_toTopOf="parent" />-->
-
         <Switch
             android:id="@+id/displayNameplateSwitch"
             android:layout_width="wrap_content"
@@ -51,7 +28,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
             android:id="@+id/nameplateLabel"
@@ -63,14 +41,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/displayNameplateSwitchLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/displayNameplateSwitchLabel"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
             android:id="@+id/displayNameplateSwitchLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Display artist name and date"
+            android:text="@string/nameplate_switch_text"
             android:textColor="#ffff"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/displayNameplateSwitch"
@@ -82,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Adaptive matting color"
+            android:text="@string/adaptive_matting_color"
             android:textColor="#ffff"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/nameplateLabel"
@@ -97,80 +76,11 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="@color/lb_tv_white"
-            android:text="Start Daydreaming"
+            android:text="@string/start_daydreaming"
             android:textColor="@color/theme_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <!--<TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Delay for Transition"
-            android:textColor="#ffff"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/list"
-            app:layout_constraintStart_toEndOf="@+id/editText"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.673" />
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:hint="Enter numbers here"
-            android:inputType="numberDecimal"
-            android:textColor="#ffff"
-            android:textColorHint="#ffff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.011"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.96" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Set OverScan"
-            android:textColor="#ffff"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editText3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.96" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="492dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:hint="(minutes)"
-            android:inputType="numberDecimal"
-            android:textColorHint="#D3D3D3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.028"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.68" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="photogroups">
+        <item>@array/telgephotos</item>
+    </array>
+    <array name="telgephotos">
+        <item>@drawable/autumn_on_the_seine_at_argenteuil</item>
+        <item>@drawable/landscape_at_newfields</item>
+        <item>@drawable/road_la_cavee</item>
+        <item>@drawable/rocky_landscape</item>
+        <item>@drawable/the_magpie</item>
+    </array>
+</resources>

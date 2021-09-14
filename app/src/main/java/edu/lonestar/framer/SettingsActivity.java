@@ -14,26 +14,20 @@
 
 package edu.lonestar.framer;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import java.util.Vector;
-
-import edu.lonestar.framer.util.ArtistSwitchModel;
-import edu.lonestar.framer.util.RemoteImage;
-
+@SuppressLint("UseSwitchCompatOrMaterialCode")
 public class SettingsActivity extends Activity {
 
     SharedPreferences sharedPref;
-    ArtistListAdapter dataadapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 // repopulate fields
@@ -41,11 +35,6 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
         sharedPref = this.getSharedPreferences("framer", Context.MODE_PRIVATE);
         // setting the id to the list view
-
-        // creating the adapter object
-        dataadapter = new ArtistListAdapter(this, refreshArtistSwitchVector());
-                // setting the adapter
-        new DownloadDaemon().refresh();
 
         // settings id's
         final Switch Adaptive_matting = findViewById(R.id.nameplateLabel);
@@ -64,60 +53,35 @@ public class SettingsActivity extends Activity {
             // moving the slider
             displayNameplateSwitch.toggle();
         }
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
-                startActivity(intent);
-            }
+        startButton.setOnClickListener(v -> {
+            final Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
+            startActivity(intent);
         });
-        int minutes = preferences.getInt("length_of_time",0);
-        int overscan_amount = preferences.getInt("overscan",0);
-
+        /*
+        minutes = preferences.getInt("length_of_time",0);
+        overscan_amount = preferences.getInt("overscan",0);
+        */
 
         Adaptive_matting.setChecked(sharedPref.getBoolean("adaptive_matting", false));
-        Adaptive_matting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences.Editor a = sharedPref.edit();
-                // just saving whether the adaptive matting is on or not
-                a.putBoolean("adaptive_matting", Adaptive_matting.isChecked());
-                a.apply();
+        Adaptive_matting.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferences.Editor a = sharedPref.edit();
+            // just saving whether the adaptive matting is on or not
+            a.putBoolean("adaptive_matting", Adaptive_matting.isChecked());
+            a.apply();
 
-            }
         });
 
         displayNameplateSwitch.setChecked(sharedPref.getBoolean("display_nameplate", false));
-        displayNameplateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences.Editor e = sharedPref.edit();
-                // just saving the name plate and whether it was checked
-                e.putBoolean("display_nameplate", displayNameplateSwitch.isChecked());
-                e.apply();
+        displayNameplateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferences.Editor e = sharedPref.edit();
+            // just saving the name plate and whether it was checked
+            e.putBoolean("display_nameplate", displayNameplateSwitch.isChecked());
+            e.apply();
 
-            }
         });
         //
         //
-    }
-// returning the actual vector
-
-    public static Vector<ArtistSwitchModel> refreshArtistSwitchVector(){
-        Vector<ArtistSwitchModel> finalArtists = new Vector<>();
-        for (RemoteImage i: DownloadDaemon.obunfiltered){
-            boolean found = false;
-            for (ArtistSwitchModel s : finalArtists){
-                if (s.name.equals(i.getArtist())){
-                    found = true;
-                }
-            }
-            if (!found){
-                finalArtists.add(new ArtistSwitchModel(i.getArtist()));
-            }
-        }
-        return finalArtists;
     }
 }
 
