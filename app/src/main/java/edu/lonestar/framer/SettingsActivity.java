@@ -28,6 +28,7 @@ import android.widget.Switch;
 public class SettingsActivity extends Activity {
 
     SharedPreferences sharedPref;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 // repopulate fields
@@ -42,14 +43,12 @@ public class SettingsActivity extends Activity {
         final Button startButton = findViewById(R.id.startButton);
         // populating from shared preferences
         // had to use not because seemded to be on
-        SharedPreferences preferences  = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!preferences.getBoolean("adaptive_matting",false))
-        {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!preferences.getBoolean("adaptive_matting", false)) {
             // moving the slider
             Adaptive_matting.toggle();
         }
-        if (!preferences.getBoolean("display_nameplate",false))
-        {
+        if (!preferences.getBoolean("display_nameplate", false)) {
             // moving the slider
             displayNameplateSwitch.toggle();
         }
@@ -84,4 +83,23 @@ public class SettingsActivity extends Activity {
         //
     }
 }
+// returning the actual vector
+//
+//    public static Vector<ArtistSwitchModel> refreshArtistSwitchVector(){
+//        Vector<ArtistSwitchModel> finalArtists = new Vector<>();
+//        for (RemoteImage i: DownloadDaemon.obunfiltered){
+//            boolean found = false;
+//            for (ArtistSwitchModel s : finalArtists){
+//                if (s.name.equals(i.getArtist())) {
+//                    found = true;
+//                    break;
+//                }
+//            }
+//            if (!found){
+//                finalArtists.add(new ArtistSwitchModel(i.getArtist()));
+//            }
+//        }
+//        return finalArtists;
+//    }
+//}
 
