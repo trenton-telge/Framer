@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerDaydreamService extends DreamService {
     SharedPreferences sharedPref;
     static boolean wantsAdaptive = false;

@@ -13,74 +13,146 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="27dp"
         android:layout_marginLeft="48dp"
+        android:layout_marginTop="27dp"
         android:layout_marginRight="48dp"
-        android:layout_marginTop="27dp">
-
-        <Switch
-            android:id="@+id/displayNameplateSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-        <Switch
-            android:id="@+id/nameplateLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/displayNameplateSwitchLabel"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-        <TextView
-            android:id="@+id/displayNameplateSwitchLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/nameplate_switch_text"
-            android:textColor="#ffff"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/displayNameplateSwitch"
-            app:layout_constraintStart_toEndOf="@+id/displayNameplateSwitch"
-            app:layout_constraintTop_toTopOf="@+id/displayNameplateSwitch" />
-
-        <TextView
-            android:id="@+id/adaptiveMattingLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/adaptive_matting_color"
-            android:textColor="#ffff"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/nameplateLabel"
-            app:layout_constraintStart_toEndOf="@+id/nameplateLabel"
-            app:layout_constraintTop_toTopOf="@+id/nameplateLabel" />
+        android:layout_marginBottom="27dp">
 
         <Button
             android:id="@+id/startButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:backgroundTint="@color/lb_tv_white"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@android:color/white"
             android:text="@string/start_daydreaming"
             android:textColor="@color/theme_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/startButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Switch
+                        android:id="@+id/displayNameplateSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:minHeight="48dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                    <Switch
+                        android:id="@+id/mattingSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        app:layout_constraintStart_toStartOf="@+id/displayNameplateSwitch"
+                        app:layout_constraintTop_toBottomOf="@+id/displayNameplateSwitch"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                    <Switch
+                        android:id="@+id/autoRotateSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        app:layout_constraintStart_toStartOf="@+id/mattingSwitch"
+                        app:layout_constraintTop_toBottomOf="@+id/mattingSwitch"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                    <TextView
+                        android:id="@+id/autoRotateLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/rotate_image"
+                        android:textColor="#ffff"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/autoRotateSwitch"
+                        app:layout_constraintStart_toEndOf="@+id/autoRotateSwitch"
+                        app:layout_constraintTop_toBottomOf="@+id/mattingSwitch" />
+
+                    <TextView
+                        android:id="@+id/adaptiveMattingLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/adaptive_matting_color"
+                        android:textColor="#ffff"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/mattingSwitch"
+                        app:layout_constraintStart_toEndOf="@+id/mattingSwitch"
+                        app:layout_constraintTop_toBottomOf="@+id/displayNameplateSwitch" />
+
+                    <TextView
+                        android:id="@+id/displayNameplateSwitchLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="@string/nameplate_switch_text"
+                        android:textColor="#ffff"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/displayNameplateSwitch"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/displayNameplateSwitch"
+                        app:layout_constraintTop_toTopOf="@+id/displayNameplateSwitch"
+                        app:layout_constraintVertical_bias="0.347" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/not_available_classic"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/listTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/image_packs_title"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/groupsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

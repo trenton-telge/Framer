@@ -7,8 +7,11 @@
     <string name="video_error_unknown_error">Failed to load video</string>
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
-    <string name="nameplate_switch_text">Display artist name and date</string>
-    <string name="adaptive_matting_color">Adaptive matting color</string>
+    <string name="image_packs_title">Image Packs</string>
+    <string name="nameplate_switch_text">Display artist name and date *</string>
+    <string name="adaptive_matting_color">Adaptive matting color *</string>
+    <string name="not_available_classic">* Not available when using classic mode</string>
+    <string name="rotate_image">Rotate image every hour</string>
     <string name="start_daydreaming">Start Daydreaming</string>
     <string name="artist_def">{artist}</string>
     <string name="title_def">{title}</string>

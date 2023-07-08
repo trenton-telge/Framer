@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="photogroups">
-        <item>@array/telgephotos</item>
-    </array>
-    <array name="telgephotos">
+    <string-array name="photogroups">
+        <item>Original</item>
+    </string-array>
+    <array name="Original">
         <item>@drawable/autumn_on_the_seine_at_argenteuil</item>
         <item>@drawable/landscape_at_newfields</item>
         <item>@drawable/road_la_cavee</item>

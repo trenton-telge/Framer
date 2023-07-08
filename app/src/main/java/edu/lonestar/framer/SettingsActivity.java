@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2014 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package edu.lonestar.framer;
 
 import android.annotation.SuppressLint;
@@ -21,8 +7,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Switch;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
+import edu.lonestar.framer.util.StringAdapter;
 
 @SuppressLint("UseSwitchCompatOrMaterialCode")
 public class SettingsActivity extends Activity {
@@ -38,15 +34,16 @@ public class SettingsActivity extends Activity {
         // setting the id to the list view
 
         // settings id's
-        final Switch Adaptive_matting = findViewById(R.id.nameplateLabel);
+        final Switch adaptiveMattingSwitch = findViewById(R.id.mattingSwitch);
         final Switch displayNameplateSwitch = findViewById(R.id.displayNameplateSwitch);
+        final Switch autoRotateSwitch = findViewById(R.id.autoRotateSwitch);
         final Button startButton = findViewById(R.id.startButton);
         // populating from shared preferences
         // had to use not because seemded to be on
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (!preferences.getBoolean("adaptive_matting", false)) {
             // moving the slider
-            Adaptive_matting.toggle();
+            adaptiveMattingSwitch.toggle();
         }
         if (!preferences.getBoolean("display_nameplate", false)) {
             // moving the slider
@@ -62,13 +59,12 @@ public class SettingsActivity extends Activity {
         overscan_amount = preferences.getInt("overscan",0);
         */
 
-        Adaptive_matting.setChecked(sharedPref.getBoolean("adaptive_matting", false));
-        Adaptive_matting.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        adaptiveMattingSwitch.setChecked(sharedPref.getBoolean("adaptive_matting", false));
+        adaptiveMattingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor a = sharedPref.edit();
             // just saving whether the adaptive matting is on or not
-            a.putBoolean("adaptive_matting", Adaptive_matting.isChecked());
+            a.putBoolean("adaptive_matting", adaptiveMattingSwitch.isChecked());
             a.apply();
-
         });
 
         displayNameplateSwitch.setChecked(sharedPref.getBoolean("display_nameplate", false));
@@ -77,29 +73,21 @@ public class SettingsActivity extends Activity {
             // just saving the name plate and whether it was checked
             e.putBoolean("display_nameplate", displayNameplateSwitch.isChecked());
             e.apply();
-
         });
+
+        autoRotateSwitch.setChecked(sharedPref.getBoolean("auto_rotate", false));
+        autoRotateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferences.Editor e = sharedPref.edit();
+            // just saving the name plate and whether it was checked
+            e.putBoolean("auto_rotate", autoRotateSwitch.isChecked());
+            e.apply();
+        });
+
+        final RecyclerView groupsList = findViewById(R.id.groupsList);
+        final List<String> groupsArray = Arrays.asList(getResources().getStringArray(R.array.photogroups));
+        groupsList.setAdapter(new StringAdapter(groupsArray));
+        groupsList.setLayoutManager(new LinearLayoutManager(this));
         //
         //
     }
 }
-// returning the actual vector
-//
-//    public static Vector<ArtistSwitchModel> refreshArtistSwitchVector(){
-//        Vector<ArtistSwitchModel> finalArtists = new Vector<>();
-//        for (RemoteImage i: DownloadDaemon.obunfiltered){
-//            boolean found = false;
-//            for (ArtistSwitchModel s : finalArtists){
-//                if (s.name.equals(i.getArtist())) {
-//                    found = true;
-//                    break;
-//                }
-//            }
-//            if (!found){
-//                finalArtists.add(new ArtistSwitchModel(i.getArtist()));
-//            }
-//        }
-//        return finalArtists;
-//    }
-//}
-

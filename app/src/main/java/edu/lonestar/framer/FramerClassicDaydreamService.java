@@ -1,20 +1,24 @@
 package edu.lonestar.framer;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Handler;
 import android.service.dreams.DreamService;
 import android.widget.ImageView;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.logging.Logger;
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class FramerClassicDaydreamService extends DreamService {
     SharedPreferences sharedPref;
 
@@ -56,16 +60,31 @@ public class FramerClassicDaydreamService extends DreamService {
     }
 
     private void displayNewImage(){
-        TypedArray images = getResources().obtainTypedArray(R.array.telgephotos);
+        Set<String> activeSets = sharedPref.getStringSet("active_groups", new HashSet<>());
+        if (activeSets.isEmpty()) {
+            ((ImageView)findViewById(R.id.imageViewMimic)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.default_background));
+            return;
+        }
+        List<String> setsList = new ArrayList<>(activeSets);
+        Collections.shuffle(setsList);
+        String pickedPack = setsList.get(0);
+        TypedArray images = getStringResourceByName(pickedPack);
         int selectedID = new Random().nextInt(images.length());
         Drawable result = images.getDrawable(selectedID);
+        Logger.getAnonymousLogger().info("Loaded drawable " + (selectedID + 1) + " of " + images.length());
         ((ImageView)findViewById(R.id.imageViewMimic)).setImageDrawable(result);
         images.recycle();
-        /*
-        ((ImageView)findViewById(R.id.imageViewMimic)).setImageResource(R.drawable.framer_banner);
-        final Handler handler = new Handler();
-        handler.postDelayed(this::displayNewImage, 2000);
-        */
+
+        if (sharedPref.getBoolean("auto_rotate", false)) {
+            final Handler handler = new Handler();
+            handler.postDelayed(this::displayNewImage, 1000*60*60);
+        }
+    }
+    private TypedArray getStringResourceByName(String aString) {
+        String packageName = getPackageName();
+        int resId = getResources().getIdentifier(aString, "array", packageName);
+        Logger.getAnonymousLogger().info("Using image pack " + aString);
+        return getResources().obtainTypedArray(resId);
     }
 
 }
