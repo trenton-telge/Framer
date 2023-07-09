@@ -9,5 +9,9 @@
         <item>@drawable/road_la_cavee</item>
         <item>@drawable/rocky_landscape</item>
         <item>@drawable/the_magpie</item>
+        <item>@drawable/blue_bonnets_early_morning</item>
+        <item>@drawable/isle_of_shoals</item>
+        <item>@drawable/noreaster_moonlight</item>
+        <item>@drawable/the_water_garden</item>
     </array>
 </resources>
